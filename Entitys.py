@@ -7,7 +7,7 @@ class Entity:
     speed = 0
     crit = 0
 
-    def __init__(self, hp, damage, speed, crit, armor=None):
+    def __init__(self, hp, damage, speed, crit, armor=0):
         self.hp = hp
         self.damage = damage
         self.speed = speed
@@ -18,9 +18,18 @@ class Entity:
             entity.hp = self.hp - (self.damage + self.crit)
         else:
             entity.hp = self.hp - (self.damage + self.crit) * self.armor
+    
+    def Entity_base(self, a, b, c, d, e):
+        hp = self.hp
+        damage = self.damage
+        crit = self.crit
+        armor = self.armor
+        hp = a
+        damage = b
+        crit = randint(c, d)
+        armor = e
+        return hp, damage, crit, armor
 
-    def crit_damage(self, n, j):
-        self.crit = randint(n, j)
 
 class Player(Entity):
     inventory = []
@@ -43,4 +52,7 @@ class Player(Entity):
 class Monsters(Entity):
 
     def __init__(self):
-        super(Monsters).__init__(0, 0, 0, 0, 0)
+        super(Entity).__init__(0, 0, 0, self.crit_damage(0, 0), 0)
+
+    def zombie(self):
+        hp, damage, crit, armor = Entity().Entity_base(20, 10, 1, 3, 0)
