@@ -58,32 +58,7 @@ class Random_C:
         pass
 
     def vilage(self):
-        def for_Event(arr, n, j, d):
-            for b in range(1, 8):
-                b = b
-            a_rn = randint(n, j)
-            for i in arr.keys():
-                if i == d:
-                    a = arr[d]
-                    print(f"{b} --> Предмет:", a[a_rn])
-
-        if self.classes == "common":
-            for_Event(info_all.specification, 0, 5, "common")
-
-        elif self.classes == "uncommon":
-            for_Event(info_all.specification, 0, 5, "uncommon")
-
-        elif self.classes == "rare":
-            for_Event(info_all.specification, 0, 5, "rare")
-
-        elif self.classes == "epic":
-            for_Event(info_all.specification, 0, 5, "epic")
-
-        elif self.classes == "mythical":
-            for_Event(info_all.specification, 0, 5, "mythical")
-
-
-
+        pass
 
     def ruins(self):
         pass
