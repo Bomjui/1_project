@@ -36,28 +36,23 @@ class Village:
                 print(f"--> Предмет: {a[a_rn]} | Цена: {arr_2[price_index]} монеты")
                 return a[a_rn], arr_2[price_index]
 
-    def Item_give(self):
+    def Weapon_give(self):
         classes = Randomas().Rndm_class()
 
         if classes == "common":
-            a = self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "common", 0)
-            return a
+            return self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "common", 0)
 
         elif classes == "uncommon":
-            a = self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "uncommon", 1)
-            return a
+            return self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "uncommon", 1)
 
         elif classes == "rare":
-            a = self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "rare", 2)
-            return a
+            return self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "rare", 2)
 
         elif classes == "epic":
-            a = self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "epic", 3)
-            return a
+            return self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "epic", 3)
 
         elif classes == "mythical":
-            a = self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "mythical", 4)
-            return a
+            return self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "mythical", 4)
 
     def market(self):
         print("Добро пожаловать в магазин")
@@ -66,19 +61,35 @@ class Village:
 
         for i in info_all.shop_catalog:
             print(i, end=" ")
+
         choice_catalog = int(input())
-        if choice_catalog == 1:
+
+        def shop_logic(arr):
             catalog_random = Random_C()
             catalog = []
-
+            prices = []
 
             for i in range(1, 9):
                 print(i, end=" ")
-                item, price = self.Item_give()
+                item, price = arr
                 catalog.append(item)
+                prices.append(price)
                 if i == 8:
                     choice_i = int(input())
-                    print(f"Предмет {catalog[choice_i + 1]} за {price}")
+                    print(f"Вы точно хотите взять предмет {catalog[choice_i-1]} за {prices[choice_i-1]} монет?")
+                    choise_weapon = input("Ответ да/нет?: ")
+                    if choise_weapon.lower == "да":
+                        return catalog[choice_i-1], prices[choice_i-1]
+                    else:
+                        print("Тогда иди прочь")
+
+        def items_shop():
+            shop_logic(self.Items_give())
+    
+        if choice_catalog == 1:
+            shop_logic(self.Weapon_give())
+        elif choice_catalog == 2:
+            items_shop(self.Items_give)
 
 
 
