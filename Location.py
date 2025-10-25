@@ -1,5 +1,6 @@
 import info_all
-from Randoma import Random_C
+from random import randint
+from Randoma import Random_C, Randomas
 
 class Village:
     shop = False
@@ -27,16 +28,60 @@ class Village:
             else:
                 pass
 
+    def for_Event(self, arr, arr_2, n, j, d, price_index):
+        a_rn = randint(n, j)
+        for i in arr.keys():
+            if i == d:
+                a = arr[d]
+                print(f"--> Предмет: {a[a_rn]} | Цена: {arr_2[price_index]} монеты")
+                return a[a_rn], arr_2[price_index]
+
+    def Item_give(self):
+        classes = Randomas().Rndm_class()
+
+        if classes == "common":
+            a = self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "common", 0)
+            return a
+
+        elif classes == "uncommon":
+            a = self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "uncommon", 1)
+            return a
+
+        elif classes == "rare":
+            a = self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "rare", 2)
+            return a
+
+        elif classes == "epic":
+            a = self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "epic", 3)
+            return a
+
+        elif classes == "mythical":
+            a = self.for_Event(info_all.specification, info_all.catalog_price, 0, 5, "mythical", 4)
+            return a
+
     def market(self):
         print("Добро пожаловать в магазин")
         print("Снизу вы можете увидеть наш католог")
+
+
         for i in info_all.shop_catalog:
             print(i, end=" ")
         choice_catalog = int(input())
         if choice_catalog == 1:
             catalog_random = Random_C()
-            a = []
-            for i in range(8):
-                a.append(catalog_random.vilage())
+            catalog = []
+
+
+            for i in range(1, 9):
+                print(i, end=" ")
+                item, price = self.Item_give()
+                catalog.append(item)
+                if i == 8:
+                    choice_i = int(input())
+                    print(f"Предмет {catalog[choice_i + 1]} за {price}")
+
+
+
+
 Vill = Village()
 Vill.market()
